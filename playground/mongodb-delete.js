@@ -2,12 +2,16 @@
 const {MongoClient, ObjectID} = require('mongodb');
 
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, client) => {
     if (error) {
         return console.log('Unable to connect to MongoDB server', error)
     }
 
+    const db = client.db('TodoApp');
+
+
     console.log('Connected to MongoDB server');
+
 
 
     db.collection('Users').deleteMany({name: 'Mateusz'}).then(
@@ -22,5 +26,5 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
         result => console.log(result)
     );
 
-    db.close();
+    client.close();
 });

@@ -2,12 +2,15 @@
 const {MongoClient, ObjectID} = require('mongodb');
 
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, client) => {
     if (error) {
         return console.log('Unable to connect to MongoDB server', error)
     }
 
+    const db = client.db('TodoApp');
+
     console.log('Connected to MongoDB server');
+
 
     // db.collection('Todos').find({
     //     _id: new ObjectID('5b4480fc647d437d59781ebb') //needs to be an ObjectID, not a string
@@ -26,5 +29,5 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
     );
 
 
-    db.close();
+    client.close();
 });
