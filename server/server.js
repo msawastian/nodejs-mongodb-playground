@@ -64,8 +64,8 @@ app.delete(`/todos/:id`, (request, response) => {
             return response.status(404).send();
         }
 
-        response.status(200).send(document);
-    }).catch(error => response.status(400).send(error))
+        response.status(200).send({document});
+    }).catch(error => response.status(400).send())
 });
 
 app.listen(port, () => {
