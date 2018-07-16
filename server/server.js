@@ -13,7 +13,9 @@ app.use(bodyParser.json());
 
 app.post('/todos', (request, response) => {
     const todo = new Todo({
-        text: request.body.text
+        text: request.body.text,
+        completed: request.body.completed,
+        completedAt: request.body.completedAt
     });
 
     todo.save().then(
