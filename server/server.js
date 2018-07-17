@@ -97,6 +97,20 @@ app.patch('/todos/:id', (request, response) => {
     })
 });
 
+app.post('/users/', (request, response) => {
+    const body = _.pick(request.body, ['email', 'password']);
+    const newUser = new User({...body});
+
+    newUser.save()
+        .then(() => {
+            return newUser.generateAuthToken();
+        })
+        .then(token => {
+            response.header({'x-auth': token}).send(newUser)
+        })
+        .catch(error => response.send(error))
+});
+
 
 app.listen(port, () => {
     console.log(`Started on port ${port}.`)
