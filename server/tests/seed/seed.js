@@ -30,13 +30,15 @@ const dummyTodos = [
         _id: new ObjectID(),
         text: 'dummy todo #1',
         completed: true,
-        completedAt: 122333
+        completedAt: 122333,
+        _creator: userOneID
     },
     {
         _id: new ObjectID(),
         text: 'dummy todo #2',
         completed: false,
-        completedAt: null
+        completedAt: null,
+        _creator: userTwoID
     }
 ];
 

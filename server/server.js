@@ -16,11 +16,10 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
-app.post('/todos', (request, response) => {
+app.post('/todos', authenticate, (request, response) => {
     const todo = new Todo({
         text: request.body.text,
-        completed: request.body.completed,
-        completedAt: request.body.completedAt
+        _creator: request.user._id
     });
 
     todo.save().then(
@@ -29,8 +28,10 @@ app.post('/todos', (request, response) => {
     )
 });
 
-app.get('/todos', (request, response) => {
-    Todo.find().then(
+app.get('/todos', authenticate, (request, response) => {
+    Todo.find({
+        _creator: request.user._id
+    }).then(
         todos => response.send({todos}),
         error => response.status(400).send(error)
     )
