@@ -109,7 +109,7 @@ app.post('/users/', (request, response) => {
         .then(token => {
             response.header({'x-auth': token}).send(newUser)
         })
-        .catch(error => response.send(error))
+        .catch(error => response.status(400).send(error))
 });
 
 app.get('/users/me', authenticate, (request, response) => {
